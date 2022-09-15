@@ -1,0 +1,153 @@
+\documentclass[12pt,twoside,english]{article}
+\usepackage[utf8]{inputenc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% template for II2202 proposal
+%% original 2020.08.28
+%% revised  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+
+\input{lib/includes}
+\input{lib/acronyms}
+
+\title{A Review on Text Data Format for Data Science}
+%Text Data Formats in Data Science: Performance Evaluation}
+\author{
+        \textsc{Steven Shidi Zhou}
+            \qquad
+        \textsc{Emil Ståhl}
+        \mbox{}\\
+        \normalsize
+            \texttt{shidi}
+        \textbar{}
+            \texttt{emilstah}
+        \normalsize
+            \texttt{@kth.se}
+}
+\date{\today}
+
+\lhead{II2202, Fall 2022, Period 1}
+%% or \lhead{II2202, Fall 2020, Period 1}
+\chead{Project Proposal}
+\rhead{\date{\today}}
+
+\makeatletter
+\let\ps@plain\ps@fancy 
+\makeatother
+
+\setlength{\headheight}{15pt}
+\begin{document}
+%TC:ignore
+\maketitle
+%TC:endignore
+
+% \begin{abstract}
+% \label{sec:abstract}
+
+% Your abstract here.
+
+% \end{abstract}
+%%\clearpage
+
+\selectlanguage{english}
+%TC:ignore
+%TC:endignore
+
+\section{Allocation of responsibilities}
+\label{sect:alloc_responsibilities}
+Steven Shidi Zhou is responsible for writing the benchmark programs and systematically testing the data set formats in question, writing the Introduction, Background, and Results Analysis Section in the report, and presenting the project plan. 
+
+Emil Ståhl is responsible for collecting data using the benchmark programs produced by Steven Shidi Zhou, conducting a qualitative assessment, writing the Results and Conclusion sections in the report, and presenting the ethical and sustainability aspects of the project. 
+
+Both authors are responsible for presenting the final project and the final version of the report.
+
+
+\section{Organization}
+\label{sect:organization}
+This project is organized as a two-person project and build on the basis of some previous works, such as \cite{plase_comparison_2017} and \cite{blomer_quantitative_2018}. Qualitative and quantitative assessments will run simultaneously.
+\section{Background}
+\label{sect:background}
+The modern society produces a vast amount of data every day. For this data to be 
+The field of data science heavily relies on the creation, storage, and analysis of text data. This data can be stored in a variety of different formats. Examples of such data formats are csv, xlsx, Parquet, and Avro. 
+
+
+
+This project builds on the basis of previous work's comparison on different data formats, such as comparing the compact data formats like Avro and Parquet in HDFS, or data formats for a specific field such as \gls{HEP} analysis. \cite{plase_comparison_2017, blomer_quantitative_2018}.
+
+%Adding some more content
+We will use the quantitative method introduced from before those previous work, such as the file stability test using bit flip, but with the time constraint, we will only be performing the benchmark against 3 or 4 common file formats (csv, parquet, avro, and xlsx if time permits) used in Data Science.
+
+\section{Problem statement}
+\label{sect:problem_statement}
+The field of data science is highly relying on the creation, storage, and analysis of text data which can be stored in various data formats. However, there are no conventions for when to use a specific format. %This project will explore different text data formats commonly used in the field of Data Science and their performance according to various benchmarking metrics. 
+
+%Adding some more content
+This project will benchmark 3 (or 4 if time permits) different text data formats commonly used in the field of Data Science, using open licensed data of different sizes (smaller than 1 MB, between 1 MB and 100 MB, bigger than 500 MB). We will then evaluate their performance according to the 3 different benchmarking metrics (file stability, read/write speed, and finally simple operation such sum items). The benchmark will be performed using Python; for this project, we will focus on just one language instead of all the other possible languages; the reason for this is because Python is one of the most used programming languages in Data Science.
+
+\section{Problem}
+\label{sect:problem}
+Finding out which data format is the optimal choice for a particular application and size with respect to performance is essential, as it greatly improves stability and job efficiency when it comes to data science projects and applications. 
+
+\section{Hypothesis}
+\label{sect:hypothesis}
+There is an optimal text data format for its size, for a smaller data set, a row-based Avro format should provide optimal performance with regard to simple operations such as read/write. For larger data sets, the Apache Parquet format should provide better performance.
+
+\section{Purpose}
+\label{sect:purpose}
+The purpose of this work is to present various metrics and criteria to help actors make the correct choice regarding data formats according to their needs. By analyzing the performance of data formats for data science under different conditions, one can use this work to tailor data science pipelines in order to minimize disk and network resources to optimize performance. The results are potentially of interest to research organizations, commercial actors, and the open-source community related to the field of data science. 
+
+\section{Goal}
+\label{sect:goals}
+An analytical model showing when a particular data format is advantageous according to a set of metrics that describe the conditions of the application. This model can be used to validate and invalidate the hypothesis.
+
+\section{Tasks}
+\label{sect:tasks}
+A collection of different data with various sizes will be converted into different data formats such as csv, xlsx, Parquet, and Avro. Our test will be measuring the time it takes to read/write such data, as well as some basic transform operations, with each of the data formats. To measure how well the different data formats handle error, a file stability experiment will be conducted by randomly flipping file bits to simulate a corrupt data file. \cite{blomer_quantitative_2018}. Finally, qualitative methods will be prepared to gain more insight into how popular or user friendly each format is.
+
+\section{Method}
+\label{sect:method}
+The project will use the empirical method \cite{blomer_quantitative_2018} for the data format stability experiment, as well as the general performance test. We, the authors, will also use an analytical method (e.g., interview or survey) to try to get a full image; however, the analytic part of this study will be shortened due to limited time period and resource of the assignment. 
+
+\clearpage
+\section{Milestone chart (time schedule)}
+\label{sect:milestones}
+The project will start on 7 September and end at 16:59 on 28 October. There will be the following milestones and deliverables:
+
+\begin{description}
+\item{\textbf{8 September}} Presentation of the proposed research: Ethics \& Sustainability.
+
+\item{\textbf{14 September}} Research plan: First draft of the research plan, presentation, and peer review.
+
+\item{\textbf{21 September}} Completion of benchmark programs.
+
+\item{\textbf{28 September}} Quantitative analysis done.
+
+\item{\textbf{5 October}} Result collection and analysis done (Qualitative interview).
+
+\item{\textbf{10 October}} Final report: First draft and presentation with peer review of the draft report and presentation.
+
+\item{\textbf{14 October}} Written opposition: before the final seminar - with peer review.
+
+\item{\textbf{28 October}} Final report submission (the report will have been written in parallel with each of the above steps).
+
+
+\end{description}
+
+\clearpage
+\bibliography{Data-format}
+%%\bibliographystyle{IEEEtran}
+\bibliographystyle{myIEEEtran}
+
+\section{Acronyms}
+%TC:ignore
+\renewcommand{\glossarysection}[2][]{} %% skip the title
+\printglossary[type=\acronymtype,nonumberlist]
+%TC:endignore
+\clearpage
+%%TC:ignore
+%\detailtexcount{II2202-proposal}
+%%TC:endignore
+\end{document}
+

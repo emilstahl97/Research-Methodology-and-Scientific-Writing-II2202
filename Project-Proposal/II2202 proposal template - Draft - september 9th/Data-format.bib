@@ -1,0 +1,156 @@
+
+@misc{radecic_stop_2021,
+	title = {Stop {Using} {CSVs} for {Storage} — {This} {File} {Format} {Is} 150 {Times} {Faster}},
+	url = {https://towardsdatascience.com/stop-using-csvs-for-storage-this-file-format-is-150-times-faster-158bd322074e},
+	abstract = {CSV’s are costing you time, disk space, and money. It’s time to end it.},
+	language = {en},
+	urldate = {2022-09-03},
+	journal = {Medium},
+	author = {Radečić, Dario},
+	month = sep,
+	year = {2021},
+	file = {Snapshot:C\:\\Users\\Steven\\Zotero\\storage\\36WR5R6B\\stop-using-csvs-for-storage-this-file-format-is-150-times-faster-158bd322074e.html:text/html},
+}
+
+@book{rabl_big_2016,
+	address = {Cham},
+	edition = {1st ed. 2016..},
+	series = {Information {Systems} and {Applications}, incl. {Internet}/{Web}, and {HCI}},
+	title = {Big {Data} {Benchmarking} 6th {International} {Workshop}, {WBDB} 2015, {Toronto}, {ON}, {Canada}, {June} 16-17, 2015 and 7th {International} {Workshop}, {WBDB} 2015, {New} {Delhi}, {India}, {December} 14-15, 2015, {Revised} {Selected} {Papers}},
+	isbn = {978-3-319-49748-8},
+	abstract = {Big Data, Simulations and HPC Convergence -- Benchmarking Fast-Data Platforms for the Aadhaar Biometric Database -- Towards a General Array Database Benchmark: Measuring Storage Access -- ALOJA: a Benchmarking and Predictive Platform for Big Data Performance Analysis -- A Set of Metrics to Evaluate HDFS and S3 Performance on Amazon EMR with Avro and Parquet Formats -- Benchmarking the Availability and Fault Tolerance of Cassandra -- Performance Evaluation of Spark SQL using BigBench -- Accelerating Big Bench on Hadoop., This book constitutes the thoroughly refereed post-workshop proceedings of the 6th International Workshop on Big Data Benchmarking, WBDB 2015, held in Toronto, ON, Canada, in June 2015 and the 7th International Workshop, WBDB 2015, held in New Delhi, India, in December 2015. The 8 full papers presented in this book were carefully reviewed and selected from 22 submissions. They deal with recent trends in big data and HPC convergence, new proposals for big data benchmarking, as well as tooling and performance results. .},
+	language = {eng},
+	number = {10044},
+	publisher = {Springer International Publishing},
+	author = {Rabl, Tilmann and Nambiar, Raghunath and Baru, Chaitanya and Bhandarkar, Milind and Poess, Meikel and Pyne, Saumyadipta},
+	year = {2016},
+}
+
+@article{munir_cost-based_2019,
+	title = {A cost-based storage format selector for materialized results in big data frameworks},
+	volume = {38},
+	issn = {0926-8782},
+	doi = {10.1007/s10619-019-07271-0},
+	abstract = {Modern big data frameworks (such as Hadoop and Spark) allow multiple users to do large-scale analysis simultaneously, by deploying data-intensive workflows (DIWs). These DIWs of different users share many common tasks (i.e, 50–80\%), which can be materialized and reused in future executions. Materializing the output of such common tasks improves the overall processing time of DIWs and also saves computational resources. Current solutions for materialization store data on Distributed File Systems by using a fixed storage format. However, a fixed choice is not the optimal one for every situation. Specifically, different layouts (i.e., horizontal, vertical or hybrid) have a huge impact on execution, according to the access patterns of the subsequent operations. In this paper, we present a cost-based approach that helps deciding the most appropriate storage format in every situation. A generic cost-based framework that selects the best format by considering the three main layouts is presented. Then, we use our framework to instantiate cost models for specific Hadoop storage formats (namely SequenceFile, Avro and Parquet), and test it with two standard benchmark suits. Our solution gives on average 1.33
+×
+speedup over fixed SequenceFile, 1.11
+×
+speedup over fixed Avro, 1.32
+×
+speedup over fixed Parquet, and overall, it provides 1.25
+×
+speedup.},
+	language = {eng},
+	number = {2},
+	journal = {Distributed and parallel databases : an international journal},
+	author = {Munir, Rana Faisal and Abelló, Alberto and Romero, Oscar and Thiele, Maik and Lehner, Wolfgang},
+	year = {2019},
+	note = {Place: New York
+Publisher: Springer US},
+	keywords = {Àrees temàtiques de la UPC, Article, Big Data, Computer Science, Cost model, Data Structures, Data-intensive workflows, Database Management, Emmagatzematge i recuperació de la informació, File organization (Computer science), Fitxers informàtics, Format, HDFS, Informàtica, Information Systems Applications (incl.Internet), Layouts, Macrodades, Materialized results, Memory Structures, Oganització, Operating Systems, Sistemes d'informació, Storage format},
+	pages = {335--364},
+	file = {Accepted Version:C\:\\Users\\Steven\\Zotero\\storage\\DN53HLK9\\Munir et al. - 2019 - A cost-based storage format selector for materiali.pdf:application/pdf},
+}
+
+@incollection{vohra_apache_2016,
+	address = {Berkeley, CA},
+	title = {Apache {Parquet}},
+	isbn = {978-1-4842-2198-3},
+	abstract = {Apache Parquet is an efficient, structured, column-oriented (also called columnar storage), compressed, binary file format. Parquet supports several compression codecs, including Snappy, GZIP, deflate, and BZIP2. Snappy is the default. Structured file formats such as RCFile, Avro, SequenceFile, and Parquet offer better performance with compression support, which reduces the size of the data on the disk and consequently the I/O and CPU resources required to deserialize data.},
+	language = {eng},
+	booktitle = {Practical {Hadoop} {Ecosystem}},
+	publisher = {Apress},
+	author = {Vohra, Deepak},
+	year = {2016},
+	doi = {10.1007/978-1-4842-2199-0_8},
+	keywords = {Export HADOOP, File Format Structure, Hive External Table, Parquet, SequenceFile},
+	pages = {325--335},
+}
+
+@article{plase_comparison_2017,
+	title = {A {Comparison} of {HDFS} {Compact} {Data} {Formats}: {Avro} {Versus} {Parquet}},
+	volume = {9},
+	issn = {2029-2341},
+	shorttitle = {A {Comparison} of {HDFS} {Compact} {Data} {Formats}},
+	doi = {10.3846/mla.2017.1033},
+	abstract = {In this paper, file formats like Avro and Parquet are compared with text formats to evaluate the performance of the data queries. Different data query patterns have been evaluated. Cloudera’s open-source Apache Hadoop distribution CDH 5.4 has been chosen for the experiments presented in this article. The results show that compact data formats (Avro and Parquet) take up less storage space when compared with plain text data formats because of binary data format and compression advantage. Furthermore, data queries from the column based data format Parquet are faster when compared with text data formats and Avro.},
+	language = {eng},
+	number = {3},
+	journal = {Science future of Lithuania},
+	author = {Plase, Daiga and Niedrite, Laila and Taranovs, Romans},
+	year = {2017},
+	note = {Place: Vilnius
+Publisher: Gediminas Technical University},
+	keywords = {Format, Big data, Binary data, Comparative studies, Compression, Data analysis, Data compression, Object oriented programming, Queries, Software reviews, Usage},
+	pages = {267--276},
+	file = {Full Text:C\:\\Users\\Steven\\Zotero\\storage\\74QER5M3\\Plase et al. - 2017 - A Comparison of HDFS Compact Data Formats Avro Ve.pdf:application/pdf},
+}
+
+@article{ivanov_impact_2020,
+	title = {The impact of columnar file formats on {SQL}‐on‐hadoop engine performance: {A} study on {ORC} and {Parquet}},
+	volume = {32},
+	issn = {1532-0626},
+	shorttitle = {The impact of columnar file formats on {SQL}‐on‐hadoop engine performance},
+	doi = {10.1002/cpe.5523},
+	abstract = {Summary
+Columnar file formats provide an efficient way to store data to be queried by SQL‐on‐Hadoop engines. Related works consider the performance of processing engine and file format together, which makes it impossible to predict their individual impact. In this work, we propose an alternative approach: by executing each file format on the same processing engine, we compare the different file formats as well as their different parameter settings. We apply our strategy to two processing engines, Hive and SparkSQL, and evaluate the performance of two columnar file formats, ORC and Parquet. We use BigBench (TPCx‐BB), a standardized application‐level benchmark for Big Data scenarios. Our experiments confirm that the file format selection and its configuration significantly affect the overall performance. We show that ORC generally performs better on Hive, whereas Parquet achieves best performance with SparkSQL. Using ZLIB compression brings up to 60.2\% improvement with ORC, while Parquet achieves up to 7\% improvement with Snappy. Exceptions are the queries involving text processing, which do not benefit from using any compression.},
+	language = {eng},
+	number = {5},
+	journal = {Concurrency and computation},
+	author = {Ivanov, Todor and Pergolesi, Matteo},
+	year = {2020},
+	note = {Place: Hoboken
+Publisher: Wiley Subscription Services, Inc},
+	keywords = {Format, Parquet, Big data, Software reviews, big data benchmarking, BigBench, columnar file formats, Engines, Hive, ORC, Performance evaluation, Query languages, Query processing, Software upgrading, SparkSQL, SQL‐on‐Hadoop},
+	pages = {n/a},
+	file = {Full Text:C\:\\Users\\Steven\\Zotero\\storage\\VJBMHRTQ\\Ivanov and Pergolesi - 2020 - The impact of columnar file formats on SQL‐on‐hado.pdf:application/pdf},
+}
+
+@inproceedings{klang_wikiparq_2016,
+	title = {{WikiParq}: {A} {Tabulated} {Wikipedia} {Resource} {Using} the {Parquet} {Format}},
+	shorttitle = {{WikiParq}},
+	url = {https://lup.lub.lu.se/record/5e2a7be2-9bc2-4d72-bec3-618939d0b729},
+	abstract = {Wikipedia has become one of the most popular resources in natural language processing and it is used in quantities of applications. However, Wikipedia requires a substantial pre-processing step before it can be used. For instance, its set of nonstandardized annotations, referred to as the wiki markup, is language-dependent and needs specific parsers from language to language, for English, French, Italian, etc. In addition, the intricacies of the different Wikipedia resources: main article text, categories, wikidata, infoboxes, scattered into the article document or in different files make it difficult to have global view of this outstanding resource. In this paper, we describe WikiParq, a unified format based on the Parquet standard to tabulate and package the Wikipedia corpora. In combination with Spark, a map-reduce computing framework, and the SQL query language, WikiParq makes it much easier to write database queries to extract specific information or subcorpora from Wikipedia, such as all the first paragraphs of the articles in French, or all the articles on persons in Spanish, or all the articles on persons that have versions in French, English, and Spanish. WikiParq is available in six language versions and is potentially extendible to all the languages of Wikipedia. The WikiParq files are downloadable as tarball archives from this location: http://semantica.cs.lth.se/wikiparq/.},
+	language = {eng},
+	urldate = {2022-09-03},
+	author = {Klang, Marcus and Nugues, Pierre},
+	year = {2016},
+	note = {Book Title: Proceedings of the 10th International Conference on Language Resources and Evaluation (LREC 2016)},
+	keywords = {Computer and Information Science, Data- och informationsvetenskap (Datateknik), Language Technology (Computational Linguistics), Natural Sciences, Naturvetenskap, Språkteknologi (språkvetenskaplig databehandling)},
+	pages = {4141--},
+}
+
+@article{blomer_quantitative_2018,
+	title = {A quantitative review of data formats for {HEP} analyses},
+	volume = {1085},
+	issn = {1742-6596},
+	url = {https://doi.org/10.1088/1742-6596/1085/3/032020},
+	doi = {10.1088/1742-6596/1085/3/032020},
+	abstract = {The analysis of High Energy Physics (HEP) data sets often takes place outside the realm of experiment frameworks and central computing workflows, using carefully selected “n-tuples” or Analysis Object Data (AOD) as a data source. Such n-tuples or AODs may comprise data from tens of millions of events and grow to hundred gigabytes or a few terabytes in size. They are typically small enough to be processed by an institute’s cluster or even by a single workstation. N-tuples and AODs are often stored in the ROOT file format, in an array of serialized C++ objects in columnar storage layout. In recent years, several new data formats emerged from the data analytics industry. We provide a quantitative comparison of ROOT and other popular data formats, such as Apache Parquet, Apache Avro, Google Protobuf, and HDF5. We compare speed, read patterns, and usage aspects for the use case of a typical LHC end-user n-tuple analysis. The performance characteristics of the relatively simple n-tuple data layout also provides a basis for understanding performance of more complex and nested data layouts. From the benchmarks, we derive performance tuning suggestions both for the use of the data formats and for the ROOT (de-)serialization code.},
+	language = {en},
+	urldate = {2022-09-03},
+	journal = {Journal of Physics: Conference Series},
+	author = {Blomer, J.},
+	month = sep,
+	year = {2018},
+	note = {Publisher: IOP Publishing},
+	pages = {032020},
+	file = {IOP Full Text PDF:C\:\\Users\\Steven\\Zotero\\storage\\XRQ83B59\\Blomer - 2018 - A quantitative review of data formats for HEP anal.pdf:application/pdf},
+}
+
+@article{kuhring_i_2019,
+	title = {I can't believe it's not (only) software! bionic distributed storage for {Parquet} files},
+	volume = {12},
+	issn = {2150-8097},
+	url = {http://doi.org/10.14778/3352063.3352079},
+	doi = {10.14778/3352063.3352079},
+	abstract = {There is a steady increase in the size of data stored and processed as part of data science applications, leading to bottlenecks and inefficiencies at various layers of the stack. One way of reducing such bottlenecks and increasing energy efficiency is by tailoring the underlying distributed storage solution to the application domain, using resources more efficiently. We explore this idea in the context of a popular column-oriented storage format used in big data workloads, namely Apache Parquet. Our prototype uses an FPGA-based storage node that offers high bandwidth data deduplication and a companion software library that exposes an API for Parquet file access. This way the storage node remains general purpose and could be shared by applications from different domains, while, at the same time, benefiting from deduplication well suited to Apache Parquet files and from selective reads of columns in the file. In this demonstration we show, on the one hand, that by relying on the FPGA's dataflow processing model, it is possible to implement in-line deduplication without increasing latencies significantly or reducing throughput. On the other hand, we highlight the benefits of implementing the application-specific aspects in a software library instead of FPGA circuits and how this enables, for instance, regular data science frameworks running in Python to access the data on the storage node and to offload filtering operations.},
+	number = {12},
+	urldate = {2022-09-03},
+	journal = {Proceedings of the VLDB Endowment},
+	author = {Kuhring, Lucas and István, Zsolt},
+	month = aug,
+	year = {2019},
+	pages = {1838--1841},
+	file = {Full Text PDF:C\:\\Users\\Steven\\Zotero\\storage\\B838ZVZW\\Kuhring and István - 2019 - I can't believe it's not (only) software! bionic d.pdf:application/pdf},
+}
