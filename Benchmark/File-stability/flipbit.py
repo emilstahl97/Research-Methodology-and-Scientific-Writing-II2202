@@ -1,7 +1,7 @@
 import os
 import shutil
 from Bash import Bash
-
+import pandas as pd
 
 class FlipBit(Bash):
     def __init__(self) -> None:
@@ -28,8 +28,16 @@ class FlipBit(Bash):
             print("Flipped: ", file)
        
     
+    def readTest(self):
+        path = os.getcwd()+"/flippedData/"
+        for file in os.listdir(path):
+             if file.endswith('.csv'):
+                 print(file + " is a csv file")       
+                 pd.read_csv(file)
+    
 
 
 if __name__ == "__main__":
     FlipBit().iterateFiles()
     FlipBit().flipBit()
+    FlipBit().readTest()    
