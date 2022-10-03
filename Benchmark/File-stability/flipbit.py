@@ -1,4 +1,5 @@
 import os
+import shutil
 from Bash import Bash
 
 
@@ -7,10 +8,22 @@ class FlipBit(Bash):
         self.Bash = Bash()
         
     
-    def flip(self, bit: int) -> None:
-        for files in os.listdir('./data'):
-            print(files)
+    def iterateFiles(self) -> None:
+        path = os.getcwd()+"/data/"
+        for file in os.listdir(path):
+            print(path+file)
+            self.copyFile(path+file, file)
+            
+    
+    def copyFile(self, src: str, file:str) -> None:
+        dst = os.getcwd()+"/flippedData/"+file
+        shutil.copy(src, dst)        
+    
+    def flipBit(self, file: str) -> None:
+        self.Bash.execute("bitflip.sh", file)
+       
+    
 
 
 if __name__ == "__main__":
-    FlipBit().flip(1)
+    FlipBit().iterateFiles()
