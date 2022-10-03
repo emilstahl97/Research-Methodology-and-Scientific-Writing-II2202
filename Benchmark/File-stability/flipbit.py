@@ -17,19 +17,19 @@ class FlipBit(Bash):
         
     
     def iterateFiles(self) -> None:
-        path = os.getcwd()+"/data/"
+        path = self.cwd+"/data/"
         for file in os.listdir(path):
             print(path+file)
             self.copyFile(path+file, file)
             
     
     def copyFile(self, src: str, file:str) -> None:
-        dst = os.getcwd()+"/flippedData/"+file
+        dst = self.cwd+"/flippedData/"+file
         shutil.copy(src, dst)        
     
     
     def flipBit(self) -> None:
-        path = os.getcwd()+"/flippedData/"
+        path = self.cwd+"/flippedData/"
         for file in os.listdir(path):
             print(path+file)
             self.Bash.execute("bitflip.sh", path+file)
@@ -38,16 +38,6 @@ class FlipBit(Bash):
     
     def readTest(self, path:str):
         os.chdir(path)
-        
-        from collections import defaultdict
-        self.resultsDict = defaultdict(dict)
-        
-        for file in os.listdir(path):
-           self.resultsDict[str(file)]['No error'] = 0
-           self.resultsDict[str(file)]['Error'] = 0
-           self.resultsDict[str(file)]['No effect'] = 0
-           self.resultsDict[str(file)]['Undetected effect'] = 0
-           
         
         for file in os.listdir(path):
             print('Reading: ', file)
@@ -124,15 +114,28 @@ class FlipBit(Bash):
                 return False
         
 
+    def initDict(self, path:str):
+        from collections import defaultdict
+        self.resultsDict = defaultdict(dict)
+        for file in os.listdir(path):
+           self.resultsDict[str(file)]['No error'] = 0
+           self.resultsDict[str(file)]['Error'] = 0
+           self.resultsDict[str(file)]['No effect'] = 0
+           self.resultsDict[str(file)]['Undetected effect'] = 0
 
 if __name__ == "__main__":
     flipBit = FlipBit()
-    flipBit.iterateFiles()
-    flipBit.flipBit()
     flippedData = '/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedData/'
-    print('\n\nRead test on flipped data')
-    flipBit.readTest(flippedData)
-    print(flipBit.resultsDict)
-    df = pd.DataFrame.from_dict(flipBit.resultsDict, orient='index')
+    flipBit.initDict(flippedData)
+    
+    for i in range(1, 2):
+        print('Iteration: ', i)
+        flipBit.iterateFiles()
+        flipBit.flipBit()
+        print('\n\nRead test on flipped data')
+        flipBit.readTest(flippedData)
+        
+        
+    df = pd.DataFrame.from_dict(flipBit.resultsDict, orient='index')    
     df.to_csv('/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedResults.csv')
     df.to_excel('/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedResults.xlsx')
