@@ -10,6 +10,9 @@ class FlipBit(Bash):
     def __init__(self) -> None:
         self.Bash = Bash()
         self.cwd = os.getcwd()
+        if os.path.exists(self.cwd+"/flippedResults.txt"):
+            os.remove(self.cwd+"/flippedResults.txt")
+        
         
     
     def iterateFiles(self) -> None:
