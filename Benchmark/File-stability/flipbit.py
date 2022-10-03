@@ -2,7 +2,9 @@ import os
 import shutil
 from Bash import Bash
 import pandas as pd
-
+import pyarrow.csv as pv
+import pyarrow.parquet as pq
+from fastavro import writer, reader, parse_schema
 
 class FlipBit(Bash):
     def __init__(self) -> None:
@@ -39,36 +41,15 @@ class FlipBit(Bash):
         parquetReadable = 0
         parquetUnreadable = 0
         for file in os.listdir(path):
+            print('Reading: ', file)
             if file.endswith('.csv'):
-                 try:
-                    df = pd.read_csv(file, engine='python')
-                    print(f"File {file} is readable")
-                    CSVReadable += 1    
-                 except:
-                        print(f"File {file} is not readable")
-                        CSVUnreadable += 1
+                 self.read_csv_func(file)
             if file.endswith('.xlsx'):
-                try:
-                    df = pd.read_excel(file, engine='openpyxl', sheetname="sheet1")
-                    print(f"File {file} is readable")
-                    xlsxReadable += 1
-                except:
-                    print(f"File {file} is not readable")
-                    xlsxUnreadable += 1
+                self.read_xlsx_func(file)
             if file.endswith('.parquet'):
-                try:
-                    df = pd.read_parquet(
-                        path, 
-                        engine='auto', 
-                        columns=None, 
-                        storage_options=None, 
-                        use_nullable_dtypes=False
-                        )
-                    print(f"File {file} is readable")
-                    parquetReadable += 1
-                except:
-                    print(f"File {file} is not readable")
-                    parquetUnreadable += 1
+                self.read_parquet_func(file)
+            if file.endswith('.avro'):
+                self.read_avro_func(file)
                     
                     
         print(f"CSV readable: {CSVReadable}")
@@ -77,6 +58,55 @@ class FlipBit(Bash):
         print(f"xlsx unreadable: {xlsxUnreadable}")
         print(f"parquet readable: {parquetReadable}")
         print(f"parquet unreadable: {parquetUnreadable}")
+        
+    
+    # CSV read func
+    def read_csv_func(self, filename):
+        try:
+            df = pd.read_csv(filename, low_memory=False)
+            print("CSV readable")
+            return df
+        except:
+            print("CSV unreadable")
+            return None
+    
+    # xlsx read func
+    def read_xlsx_func(self, filename):
+        try:
+            df = pd.read_excel(filename)
+            print("xlsx readable")
+            return df
+        except:
+            print("xlsx unreadable")
+            return None
+        
+
+    def read_avro_func(self, filename):
+        try:
+            # 1. List to store the records
+            avro_records = []
+            # 2. Read the Avro file
+            with open(filename.replace('.csv', '.avro'), 'rb') as fo:
+                avro_reader = reader(fo)
+                for record in avro_reader:
+                    avro_records.append(record)
+            # 3. Convert to pd.DataFrame
+            df_avro = pd.DataFrame(avro_records)
+            print("Avro readable")
+            return df_avro
+        except:
+            print("Avro unreadable")
+            return None
+        
+    # parquet read func
+    def read_parquet_func(self, filename):
+        try:
+            df = pd.read_parquet(filename, engine='pyarrow')
+            print("parquet readable")
+        except:
+            print("parquet unreadable")
+            return None
+        
 
 
 if __name__ == "__main__":
