@@ -110,8 +110,8 @@ class FlipBit(Bash):
 
 
 if __name__ == "__main__":
-    #FlipBit().iterateFiles()
-    #FlipBit().flipBit()
+    FlipBit().iterateFiles()
+    FlipBit().flipBit()
     originalData = '/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/data/'
     print('Read test on original data')
     FlipBit().readTest(originalData)    
