@@ -46,13 +46,14 @@ class FlipBit(Bash):
         for file in os.listdir(path):
             print('Reading: ', file)
             if file.endswith('.csv'):
-                 self.read_csv_func(file)
-            #if file.endswith('.xlsx'):
-            #    self.read_xlsx_func(file)
+                df = self.read_csv_func(file)
+                self.compareDFs(df, file)
             if file.endswith('.parquet'):
-                self.read_parquet_func(file)
+                df = self.read_parquet_func(file)
+                self.compareDFs(df, file)
             if file.endswith('.avro'):
-                self.read_avro_func(file)
+                df = self.read_avro_func(file)
+                self.compareDFs(df, file)
                     
                     
         print(f"CSV readable: {self.CSVReadable}")
@@ -115,10 +116,26 @@ class FlipBit(Bash):
             df = pd.read_parquet(filename, engine='pyarrow')
             print("✅parquet readable")
             self.parquetReadable += 1
+            return df
         except:
             self.parquetUnreadable += 1
             print("❌parquet unreadable")
             return None
+        
+    
+    def compareDFs(self, flippedDF, filename) -> bool:
+        if flippedDF is not None:
+            originalDF = self.read_csv_func(filename)
+            if flippedDF.equals(originalDF):
+                with open('/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedResults.txt', 'a') as f:
+                    print(f"{filename} had no effect of flipping bit")
+                    f.write(f"✅{filename} had no effect of flipping bit\n")
+                return True
+            else:
+                with open('/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedResults.txt', 'a') as f:
+                    print(f"{filename} had an undetected effect of flipping bit")
+                    f.write(f"❌{filename} had undetected effect of flipping bit\n")
+                return False
         
 
 
