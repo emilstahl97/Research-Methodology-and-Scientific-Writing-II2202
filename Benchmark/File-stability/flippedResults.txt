@@ -12,3 +12,5 @@
 ❌aggregated_512KB.snappy.parquet had undetected effect of flipping bit
 ❌aggregated_10MB.avro had undetected effect of flipping bit
 ✅aggregated_1MB.csv had no effect of flipping bit
+❌aggregated.avro had undetected effect of flipping bit
+✅aggregated_20MB.csv had no effect of flipping bit
