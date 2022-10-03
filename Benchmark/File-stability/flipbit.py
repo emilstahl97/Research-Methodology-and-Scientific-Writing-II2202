@@ -30,25 +30,41 @@ class FlipBit(Bash):
             print("Flipped: ", file)
        
     
-    def readTest(self):
-        path = '/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedData/'
+    def readTest(self, path:str):
         os.chdir(path)
+        CSVReadable = 0
+        xlsxReadable = 0
+        CSVUnreadable = 0
+        xlsxUnreadable = 0
         for file in os.listdir(path):
             if file.endswith('.csv'):
                  try:
                     df = pd.read_csv(file, engine='python')
                     print(f"File {file} is readable")
+                    CSVReadable += 1    
                  except:
                         print(f"File {file} is not readable")
+                        CSVUnreadable += 1
             if file.endswith('.xlsx'):
                 try:
                     df = pd.read_excel(file)
                     print(f"File {file} is readable")
+                    xlsxReadable += 1
                 except:
                     print(f"File {file} is not readable")
+                    xlsxUnreadable += 1
+        print(f"CSV readable: {CSVReadable}")
+        print(f"CSV unreadable: {CSVUnreadable}")
+        print(f"xlsx readable: {xlsxReadable}")
+        print(f"xlsx unreadable: {xlsxUnreadable}")
 
 
 if __name__ == "__main__":
     FlipBit().iterateFiles()
     FlipBit().flipBit()
-    FlipBit().readTest()    
+    originalData = '/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/data/'
+    print('Read test on original data')
+    FlipBit().readTest(originalData)    
+    flippedData = '/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedData/'
+    print('\n\nRead test on flipped data')
+    FlipBit().readTest(flippedData)
