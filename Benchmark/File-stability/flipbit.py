@@ -36,6 +36,8 @@ class FlipBit(Bash):
         xlsxReadable = 0
         CSVUnreadable = 0
         xlsxUnreadable = 0
+        parquetReadable = 0
+        parquetUnreadable = 0
         for file in os.listdir(path):
             if file.endswith('.csv'):
                  try:
@@ -47,21 +49,39 @@ class FlipBit(Bash):
                         CSVUnreadable += 1
             if file.endswith('.xlsx'):
                 try:
-                    df = pd.read_excel(file)
+                    df = pd.read_excel(file, engine='openpyxl', sheetname="sheet1")
                     print(f"File {file} is readable")
                     xlsxReadable += 1
                 except:
                     print(f"File {file} is not readable")
                     xlsxUnreadable += 1
+            if file.endswith('.parquet'):
+                try:
+                    df = pd.read_parquet(
+                        path, 
+                        engine='auto', 
+                        columns=None, 
+                        storage_options=None, 
+                        use_nullable_dtypes=False
+                        )
+                    print(f"File {file} is readable")
+                    parquetReadable += 1
+                except:
+                    print(f"File {file} is not readable")
+                    parquetUnreadable += 1
+                    
+                    
         print(f"CSV readable: {CSVReadable}")
         print(f"CSV unreadable: {CSVUnreadable}")
         print(f"xlsx readable: {xlsxReadable}")
         print(f"xlsx unreadable: {xlsxUnreadable}")
+        print(f"parquet readable: {parquetReadable}")
+        print(f"parquet unreadable: {parquetUnreadable}")
 
 
 if __name__ == "__main__":
-    FlipBit().iterateFiles()
-    FlipBit().flipBit()
+    #FlipBit().iterateFiles()
+    #FlipBit().flipBit()
     originalData = '/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/data/'
     print('Read test on original data')
     FlipBit().readTest(originalData)    
