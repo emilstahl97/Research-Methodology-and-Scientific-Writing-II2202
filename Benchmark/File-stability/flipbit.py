@@ -19,11 +19,17 @@ class FlipBit(Bash):
         dst = os.getcwd()+"/flippedData/"+file
         shutil.copy(src, dst)        
     
-    def flipBit(self, file: str) -> None:
-        self.Bash.execute("bitflip.sh", file)
+    
+    def flipBit(self) -> None:
+        path = os.getcwd()+"/flippedData/"
+        for file in os.listdir(path):
+            print(path+file)
+            self.Bash.execute("bitflip.sh", path+file)
+            print("Flipped: ", file)
        
     
 
 
 if __name__ == "__main__":
     FlipBit().iterateFiles()
+    FlipBit().flipBit()
