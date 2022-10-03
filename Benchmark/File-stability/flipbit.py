@@ -37,9 +37,15 @@ class FlipBit(Bash):
             if file.endswith('.csv'):
                  try:
                     df = pd.read_csv(file, engine='python')
-                    print("File is readable")
+                    print(f"File {file} is readable")
                  except:
-                        print("File is not readable")
+                        print(f"File {file} is not readable")
+            if file.endswith('.xlsx'):
+                try:
+                    df = pd.read_excel(file)
+                    print(f"File {file} is readable")
+                except:
+                    print(f"File {file} is not readable")
 
 
 if __name__ == "__main__":
