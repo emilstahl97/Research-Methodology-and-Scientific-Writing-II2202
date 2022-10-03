@@ -1,0 +1,23 @@
+,No error,Error,No effect,Undetected effect
+aggregated.snappy.parquet,1,1,0,1
+aggregated_10MB.snappy.parquet,1,1,0,1
+aggregated_512KB.avro,0,1,0,0
+.DS_Store,0,0,0,0
+aggregated_15MB.csv,2,0,1,0
+aggregated_5MB.avro,1,1,0,1
+aggregated_15MB.avro,1,1,0,1
+aggregated_10MB.csv,2,0,1,0
+aggregated.csv,0,1,0,0
+aggregated_1MB.snappy.parquet,1,1,0,1
+aggregated_1MB.avro,0,1,0,0
+aggregated_5MB.snappy.parquet,1,1,0,1
+aggregated_15MB.snappy.parquet,1,1,0,1
+aggregated_20MB.snappy.parquet,1,1,0,1
+aggregated_20MB.avro,1,1,0,1
+aggregated_512KB.snappy.parquet,1,1,0,1
+aggregated_10MB.avro,1,1,0,1
+aggregated_512KB.csv,2,0,1,0
+aggregated_5MB.csv,2,0,1,0
+aggregated_1MB.csv,2,0,1,0
+aggregated.avro,0,1,0,0
+aggregated_20MB.csv,2,0,1,0

@@ -133,3 +133,6 @@ if __name__ == "__main__":
     print('\n\nRead test on flipped data')
     flipBit.readTest(flippedData)
     print(flipBit.resultsDict)
+    df = pd.DataFrame.from_dict(flipBit.resultsDict, orient='index')
+    df.to_csv('/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedResults.csv')
+    df.to_excel('/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedResults.xlsx')
