@@ -34,12 +34,15 @@ class FlipBit(Bash):
     
     def readTest(self, path:str):
         os.chdir(path)
-        CSVReadable = 0
-        xlsxReadable = 0
-        CSVUnreadable = 0
-        xlsxUnreadable = 0
-        parquetReadable = 0
-        parquetUnreadable = 0
+        self.CSVReadable = 0
+        self.avroReadable = 0
+        self.xlsxReadable = 0
+        self.CSVUnreadable = 0
+        self.avroUnreadable = 0
+        self.xlsxUnreadable = 0
+        self.parquetReadable = 0
+        self.parquetUnreadable = 0
+        
         for file in os.listdir(path):
             print('Reading: ', file)
             if file.endswith('.csv'):
@@ -52,12 +55,14 @@ class FlipBit(Bash):
                 self.read_avro_func(file)
                     
                     
-        print(f"CSV readable: {CSVReadable}")
-        print(f"CSV unreadable: {CSVUnreadable}")
-        print(f"xlsx readable: {xlsxReadable}")
-        print(f"xlsx unreadable: {xlsxUnreadable}")
-        print(f"parquet readable: {parquetReadable}")
-        print(f"parquet unreadable: {parquetUnreadable}")
+        print(f"CSV readable: {self.CSVReadable}")
+        print(f"CSV unreadable: {self.CSVUnreadable}")
+        print(f"xlsx readable: {self.xlsxReadable}")
+        print(f"xlsx unreadable: {self.xlsxUnreadable}")
+        print(f"parquet readable: {self.parquetReadable}")
+        print(f"parquet unreadable: {self.parquetUnreadable}")
+        print(f"avro readable: {self.avroReadable}")
+        print(f"avro unreadable: {self.avroUnreadable}")
         
     
     # CSV read func
@@ -65,8 +70,10 @@ class FlipBit(Bash):
         try:
             df = pd.read_csv(filename, low_memory=False)
             print("✅CSV readable")
+            self.CSVReadable += 1
             return df
         except:
+            self.CSVUnreadable += 1
             print("❌CSV unreadable")
             return None
     
@@ -74,9 +81,11 @@ class FlipBit(Bash):
     def read_xlsx_func(self, filename):
         try:
             df = pd.read_excel(filename)
+            self.xlsxReadable += 1
             print("✅xlsx readable")
             return df
         except:
+            self.xlsxUnreadable += 1
             print("❌xlsx unreadable")
             return None
         
@@ -93,8 +102,10 @@ class FlipBit(Bash):
             # 3. Convert to pd.DataFrame
             df_avro = pd.DataFrame(avro_records)
             print("✅Avro readable")
+            self.avroReadable += 1
             return df_avro
         except:
+            self.avroUnreadable += 1
             print("❌Avro unreadable")
             return None
         
@@ -103,7 +114,9 @@ class FlipBit(Bash):
         try:
             df = pd.read_parquet(filename, engine='pyarrow')
             print("✅parquet readable")
+            self.parquetReadable += 1
         except:
+            self.parquetUnreadable += 1
             print("❌parquet unreadable")
             return None
         
@@ -113,8 +126,8 @@ if __name__ == "__main__":
     FlipBit().iterateFiles()
     FlipBit().flipBit()
     originalData = '/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/data/'
-    print('Read test on original data')
-    FlipBit().readTest(originalData)    
+    #print('Read test on original data')
+    #FlipBit().readTest(originalData)    
     flippedData = '/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedData/'
     print('\n\nRead test on flipped data')
     FlipBit().readTest(flippedData)
