@@ -44,8 +44,8 @@ class FlipBit(Bash):
             print('Reading: ', file)
             if file.endswith('.csv'):
                  self.read_csv_func(file)
-            if file.endswith('.xlsx'):
-                self.read_xlsx_func(file)
+            #if file.endswith('.xlsx'):
+            #    self.read_xlsx_func(file)
             if file.endswith('.parquet'):
                 self.read_parquet_func(file)
             if file.endswith('.avro'):
@@ -64,20 +64,20 @@ class FlipBit(Bash):
     def read_csv_func(self, filename):
         try:
             df = pd.read_csv(filename, low_memory=False)
-            print("CSV readable")
+            print("✅CSV readable")
             return df
         except:
-            print("CSV unreadable")
+            print("❌CSV unreadable")
             return None
     
     # xlsx read func
     def read_xlsx_func(self, filename):
         try:
             df = pd.read_excel(filename)
-            print("xlsx readable")
+            print("✅xlsx readable")
             return df
         except:
-            print("xlsx unreadable")
+            print("❌xlsx unreadable")
             return None
         
 
@@ -92,19 +92,19 @@ class FlipBit(Bash):
                     avro_records.append(record)
             # 3. Convert to pd.DataFrame
             df_avro = pd.DataFrame(avro_records)
-            print("Avro readable")
+            print("✅Avro readable")
             return df_avro
         except:
-            print("Avro unreadable")
+            print("❌Avro unreadable")
             return None
         
     # parquet read func
     def read_parquet_func(self, filename):
         try:
             df = pd.read_parquet(filename, engine='pyarrow')
-            print("parquet readable")
+            print("✅parquet readable")
         except:
-            print("parquet unreadable")
+            print("❌parquet unreadable")
             return None
         
 
