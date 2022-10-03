@@ -10,6 +10,7 @@ class FlipBit(Bash):
     def __init__(self) -> None:
         self.Bash = Bash()
         self.cwd = os.getcwd()
+        self.resultsDict = {}        
         if os.path.exists(self.cwd+"/flippedResults.txt"):
             os.remove(self.cwd+"/flippedResults.txt")
         
@@ -37,14 +38,16 @@ class FlipBit(Bash):
     
     def readTest(self, path:str):
         os.chdir(path)
-        self.CSVReadable = 0
-        self.avroReadable = 0
-        self.xlsxReadable = 0
-        self.CSVUnreadable = 0
-        self.avroUnreadable = 0
-        self.xlsxUnreadable = 0
-        self.parquetReadable = 0
-        self.parquetUnreadable = 0
+        
+        from collections import defaultdict
+        self.resultsDict = defaultdict(dict)
+        
+        for file in os.listdir(path):
+           self.resultsDict[str(file)]['No error'] = 0
+           self.resultsDict[str(file)]['Error'] = 0
+           self.resultsDict[str(file)]['No effect'] = 0
+           self.resultsDict[str(file)]['Undetected effect'] = 0
+           
         
         for file in os.listdir(path):
             print('Reading: ', file)
@@ -57,40 +60,18 @@ class FlipBit(Bash):
             if file.endswith('.avro'):
                 df = self.read_avro_func(file)
                 self.compareDFs(df, file)
-                    
-                    
-        print(f"CSV readable: {self.CSVReadable}")
-        print(f"CSV unreadable: {self.CSVUnreadable}")
-        print(f"xlsx readable: {self.xlsxReadable}")
-        print(f"xlsx unreadable: {self.xlsxUnreadable}")
-        print(f"parquet readable: {self.parquetReadable}")
-        print(f"parquet unreadable: {self.parquetUnreadable}")
-        print(f"avro readable: {self.avroReadable}")
-        print(f"avro unreadable: {self.avroUnreadable}")
-        
+                
     
     # CSV read func
     def read_csv_func(self, filename):
         try:
             df = pd.read_csv(filename, low_memory=False)
             print("✅CSV readable")
-            self.CSVReadable += 1
+            self.resultsDict[str(filename)]['No error'] += 1
             return df
         except:
-            self.CSVUnreadable += 1
             print("❌CSV unreadable")
-            return None
-    
-    # xlsx read func
-    def read_xlsx_func(self, filename):
-        try:
-            df = pd.read_excel(filename)
-            self.xlsxReadable += 1
-            print("✅xlsx readable")
-            return df
-        except:
-            self.xlsxUnreadable += 1
-            print("❌xlsx unreadable")
+            self.resultsDict[str(filename)]['Error'] += 1
             return None
         
 
@@ -106,11 +87,11 @@ class FlipBit(Bash):
             # 3. Convert to pd.DataFrame
             df_avro = pd.DataFrame(avro_records)
             print("✅Avro readable")
-            self.avroReadable += 1
+            self.resultsDict[str(filename)]['No error'] += 1
             return df_avro
         except:
-            self.avroUnreadable += 1
             print("❌Avro unreadable")
+            self.resultsDict[str(filename)]['Error'] += 1
             return None
         
     # parquet read func
@@ -118,11 +99,11 @@ class FlipBit(Bash):
         try:
             df = pd.read_parquet(filename, engine='pyarrow')
             print("✅parquet readable")
-            self.parquetReadable += 1
+            self.resultsDict[str(filename)]['No error'] += 1
             return df
         except:
-            self.parquetUnreadable += 1
             print("❌parquet unreadable")
+            self.resultsDict[str(filename)]['Error'] += 1
             return None
         
     
@@ -130,11 +111,13 @@ class FlipBit(Bash):
         if flippedDF is not None:
             originalDF = self.read_csv_func(filename)
             if flippedDF.equals(originalDF):
+                self.resultsDict[str(filename)]['No effect'] += 1
                 with open('/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedResults.txt', 'a') as f:
                     print(f"{filename} had no effect of flipping bit")
                     f.write(f"✅{filename} had no effect of flipping bit\n")
                 return True
             else:
+                self.resultsDict[str(filename)]['Undetected effect'] += 1
                 with open('/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedResults.txt', 'a') as f:
                     print(f"{filename} had an undetected effect of flipping bit")
                     f.write(f"❌{filename} had undetected effect of flipping bit\n")
@@ -143,11 +126,10 @@ class FlipBit(Bash):
 
 
 if __name__ == "__main__":
-    FlipBit().iterateFiles()
-    FlipBit().flipBit()
-    originalData = '/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/data/'
-    #print('Read test on original data')
-    #FlipBit().readTest(originalData)    
+    flipBit = FlipBit()
+    flipBit.iterateFiles()
+    flipBit.flipBit()
     flippedData = '/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedData/'
     print('\n\nRead test on flipped data')
-    FlipBit().readTest(flippedData)
+    flipBit.readTest(flippedData)
+    print(flipBit.resultsDict)
