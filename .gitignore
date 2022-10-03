@@ -30,3 +30,4 @@ Benchmark/File-stability/data/aggregated_5MB.csv
 Benchmark/File-stability/data/aggregated_5MB.snappy.parquet
 Benchmark/File-stability/data/aggregated_5MB.xlsx
 Benchmark/File-stability/data/aggregated_full.snappy.parquet
+Benchmark/File-stability/scripts/hello.world
