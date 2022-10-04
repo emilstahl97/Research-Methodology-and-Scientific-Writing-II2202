@@ -40,6 +40,8 @@ class FlipBit(Bash):
         os.chdir(path)
         
         for file in os.listdir(path):
+            if file.endswith(".DS_Store"):
+                continue
             print('Reading: ', file)
             if file.endswith('.csv'):
                 df = self.read_csv_func(file)
@@ -118,17 +120,21 @@ class FlipBit(Bash):
         from collections import defaultdict
         self.resultsDict = defaultdict(dict)
         for file in os.listdir(path):
-           self.resultsDict[str(file)]['No error'] = 0
-           self.resultsDict[str(file)]['Error'] = 0
-           self.resultsDict[str(file)]['No effect'] = 0
-           self.resultsDict[str(file)]['Undetected effect'] = 0
+            if not file.endswith(".DS_Store"):
+                self.resultsDict[str(file)]['No error'] = 0
+                self.resultsDict[str(file)]['Error'] = 0
+                self.resultsDict[str(file)]['No effect'] = 0
+                self.resultsDict[str(file)]['Undetected effect'] = 0
 
 if __name__ == "__main__":
     flipBit = FlipBit()
     flippedData = '/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedData/'
     flipBit.initDict(flippedData)
     
-    for i in range(1, 2):
+    for i in range(0, 100):
+        os.chdir(flipBit.cwd)
+        shutil.rmtree('/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedData/')
+        os.mkdir('/Users/emilstahl/Documents/GitHub/Research-Methodology-and-Scientific-Writing-II2202/Benchmark/File-stability/flippedData/')
         print('Iteration: ', i)
         flipBit.iterateFiles()
         flipBit.flipBit()
