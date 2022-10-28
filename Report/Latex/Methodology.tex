@@ -1,0 +1,29 @@
+\section{Methodology}
+\label{sec:method}
+In this chapter, we explain the different parts of the theoretical method used to benchmark the performance limits of the various data formats. We are going to execute three separate experiments, one corresponding to each of the research questions mentioned in \ref{sect:questions}. The data set that is to be used in this study is the Google Covid-19 Open Data \cite{noauthor_covid-19_nodate}. The data is available in \gls{CSV} and JSON formats. The source of this data set comprises authoritative sources, as well as volunteers and contributors. The Google Covid-19 dataset has multiple tables, but we are only going to use the aggregated table in this study. The aggregate table has a full version and subsets that provide only the data for the most recent day \cite{noauthor_covid-19_nodate}. The full version, named aggregated\_full.csv, is around 20 GB in size, and a subset version called v3-latest, named aggregated.csv, has a size of 24 MB. For a more rapid test and result collection, we are going to use the v3-latest version to do most of our benchmark operations. The v3-latest data set is going to be cut to have the size of 1 MB, 5 MB, 10 MB, 20 MB, and 24 MB and then be converted into the different file formats that are to be benchmarked in this work. Those files are then used for the read/write speed benchmark and file stability benchmark. For the benchmark of file store size, we will additionally convert the full version of the data, which weighs in at 20 GB, into other file formats and observe the file size changes. 
+
+
+\subsection{Benchmarking environment}
+The chosen benchmark environment to perform the experiments is Google Colab, which allows anyone to write and execute arbitrary Python code through the browser and is especially well suited for machine learning, data analysis, and education \cite{noauthor_google_2022}. We are going to write our benchmark scripts in the Python programming language since it is one of the most used languages in data science. Our Python code is going to automatically and empirically benchmark the read and write performance of the data formats by iteratively performing these operations 1,000 times and taking the average elapsed time that was required for the operation to finish. We will also be using some common Python packages such as the Pandas library for this experiment. The Google Colab environment has the following technical specifications \cite{noauthor_google_2022}:
+
+\begin{itemize}
+    \item CPU model name: Intel(R) Xeon(R) CPU @ 2.20GHz
+    \item CPU cores: 2
+    \item Available RAM: 12 GB
+    \item Codec: Python\_snappy-0.6.1-cp37
+    \item Python Version: 3.7.14
+    \item Python Pandas Version: 1.3.5
+    \item Python Fastavro Version: 1.6.1
+    \item Python Snappy Version: 0.6.1
+\end{itemize}
+
+\subsection{Read \& Write Performance}
+\label{read_write_performance}
+For the read-and-write performance tests, we take the v3-latest version of the Covid-19 data, as well as the subsets of the data generated from it. We use the Pandas library to help us with the read-and-write benchmark. For reading and writing Avro files, we combine Pandas and fastavro since Pandas does not provide direct support for Avro. Specifically, Avro files are read using the fastavro package and then converted to a Pandas dataframe afterward. Likewise, for writing, we first convert the Pandas dataframe to records, which is a list of dictionaries, and then use fastavro to help write those into an Avro file. It is worth noting that for Avro and Parquet file formats, they offer different compression codecs, in this study we are going to use the snappy codec for both formats. To address potential bias during data collection, the benchmark program is run 1,000 times in the Google Colab environment. 
+
+\subsection{File stability}
+\label{File-stability-method}
+For the file stability tests, we are going to programmatically flip random bits in the files and check their resilience and ability to operate normally. This is to replicate the experiment of file stability done by Blomer with respect to \gls{HEP} datasets, but for textual time-series data \cite{blomer_quantitative_2018}. For flipping bits in the files, we make use of the bit-flipping software written by Antoine Grondin, and is available on GitHub \cite{grondin_bitflip_2022}. The software lets us randomly flip one bit of a file. The range of possible outcomes of reading files with flipped bits consists of no change at all to a potential crash of the reading operation. For the cases where there are errors reading the file, we do another check where we compare the original file with the file that had a random bit flip; if these files have identical entries the outcome is reported as 'no effect'. However, if the file entries are not equal, the outcome is recorded as an 'undetected effect'. This procedure is executed iteratively 100 times, where we increment a counter for each possible outcome every time that specific outcome occurs, the results are saved to an excel spreadsheet that is shown in Table \ref{File-stability-benchmark} of Section \ref{sect:file-stability-results}.
+
+\subsection{File store size}
+For this benchmark, since we have already created all the subset data we simply measure the size of the converted file formats. Additionally, we are also going to try to convert the 20 GB full version of the Covid-19 data into the other file formats, and observe the file size changes.

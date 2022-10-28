@@ -1,0 +1,121 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% template for II2202 report
+%% original 2015.11.24
+%% revised  2020.09.09
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\documentclass[12pt,twoside,english]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{booktabs} % For \toprule, \midrule and \bottomrule
+\usepackage{siunitx} % Formats the units and values
+\usepackage{pgfplotstable}
+\usepackage{longtable}
+\usepackage{subfig}
+\usepackage{graphicx}
+\usepackage{courier}
+\usepackage{soul}
+\usepackage{adjustbox}
+\input{lib/includes}
+\input{lib/acronyms}
+
+\sisetup{
+  round-mode          = places, % Rounds numbers
+  round-precision     = 4, % to 2 places
+}
+
+\title{A Review on Text Data Formats for Time Series Data}
+\author{
+        \textsc{Steven Shidi Zhou}
+            \qquad
+        \textsc{Emil Ståhl}
+        \mbox{}\\
+        \normalsize
+            \texttt{shidi}
+        \textbar{}
+            \texttt{emilstah}
+        \normalsize
+            \texttt{@kth.se}
+}
+\date{\today}
+
+
+\lhead{II2202}
+\rhead{\date{\today}}
+
+\makeatletter
+\let\ps@plain\ps@fancy 
+\makeatother
+
+\setlength{\headheight}{15pt}
+\begin{document}
+\input{Frontpage}
+
+\maketitle
+
+
+\begin{abstract}
+\label{sec:abstract}
+\begin{center}
+Data science pipelines process vast amounts of data stored in various data formats. For pipelines to be high performing, it is important to choose the right data format for the given application. Since data formats are implemented using different technologies, they may differ in how they handle different sizes of data. In this work, we investigate the read-and-write performance, file stability, as well as file storage size of some of the most popular data formats including csv, xlsx, Avro, and Parquet. The output of the thesis is a wide overview of how the performance of data formats is impacted by aspects such as file size and file corruption due to bit flips. The obtained results show that the four benchmarked data formats behave differently. Specifically, the discrepancy shows that Parquet offers the best read and write as well as file store performance. However, in the file stability benchmark, Parquet performed the worst while csv showed the most resilience against file corruption due to bit flips. This means that there is a trade-off between read/write performance, file store size, and file stability. This work shows that Parquet is the data format best fit for handling time series data. Suggestions for future work include repeating the read-and-write benchmark by utilizing the Apache Spark framework instead of Pandas as well as using a different data set other than time series data. 
+\end{center} 
+\end{abstract}
+%%\clearpage
+
+\pagenumbering{gobble}
+\selectlanguage{english}
+
+\clearpage
+\tableofcontents
+\clearpage
+
+%%\section*{List of Acronyms and Abbreviations}
+%%\label{list-of-acronyms-and-abbreviations}
+%%\renewcommand{\glossarysection}[2][]{} %% skip the title
+%%\printglossary[type=\acronymtype,nonumberlist]
+
+
+\clearpage
+\pagenumbering{arabic}
+
+\input{Introduction}
+
+\input{Theoretical-framework}
+
+\input{Methodology}
+
+\input{Results}
+
+\input{Discussion}
+
+\input{Conclusion}
+
+\clearpage
+\bibliography{II2202-report}
+%%\bibliographystyle{IEEEtran}
+\bibliographystyle{myIEEEtran}
+
+%\clearpage
+\appendix
+
+\section{Benchmark Results}
+Benchmark results are available in the results folder in the GitHub project, you can access the data via URL \href{https://github.com/emilstahl97/Research-Methodology-and-Scientific-Writing-II2202}{github.com/emilstahl97/Research-Methodology-and-Scientific-Writing-II2202}
+%\subsection{Read performance benchmarks}
+%\label{readappendix}
+%\input{tables/csv_pandas_read_result}
+%\input{tables/xlsx_pandas_read_result}
+%\input{tables/avro_pandas_read_result}
+%\input{tables/parquet_pandas_read_result}
+
+%\clearpage
+%\subsection{Write performance benchmarks}
+%\label{writeappendix}
+
+
+%\input{tables/csv_pandas_write_result}
+%\input{tables/xlsx_pandas_write_result}
+%\input{tables/avro_pandas_write_result}
+%\input{tables/parquet_pandas_write_result}
+
+
+\end{document}

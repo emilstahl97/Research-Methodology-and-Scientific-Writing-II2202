@@ -1,0 +1,9 @@
+File name, CSV, XLSX, Avro, Parquet
+aggregated\_512KB, 0.5, 0.90625, 0.209961, 0.318359
+aggregated\_1MB, 1, 1.9, 0.383789, 0.509766
+aggregated\_5MB, 5, 9.2, 1.8, 1.4
+aggregated\_10MB, 10, 17.9, 3.8, 2.7
+aggregated\_15MB, 15, 26.4, 5.6, 3.6
+aggregated\_20MB, 20, 35.7, 6.7, 4.2
+aggregated (v3-latest), 24.1, 46.8, 6.7,  4.8
+aggregated\_full, 21411.84 (20.91GB), Not convertible, 3072(3GB), 917.6

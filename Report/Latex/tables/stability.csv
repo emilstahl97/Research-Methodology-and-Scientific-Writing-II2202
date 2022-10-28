@@ -1,0 +1,22 @@
+File Name,File Type,Error,No effect,Undetected effect
+aggregated\_512KB,csv,18,82,0
+aggregated\_512KB,avro,54,0,46
+aggregated\_512KB,parquet,22,0,78
+aggregated\_1MB,csv,14,86,0
+aggregated\_1MB,avro,59,0,41
+aggregated\_1MB,parquet,19,0,81
+aggregated\_5MB,csv,15,85,0
+aggregated\_5MB,avro,49,0,51
+aggregated\_5MB,parquet,22,0,78
+aggregated\_10MB,csv,13,87,0
+aggregated\_10MB,avro,58,0,42
+aggregated\_10MB,parquet,29,0,71
+aggregated\_15MB,csv,17,83,0
+aggregated\_15MB,avro,52,0,48
+aggregated\_15MB,parquet,31,0,69
+aggregated\_20MB,csv,12,88,0
+aggregated\_20MB,avro,60,0,40
+aggregated\_20MB,parquet,31,0,69
+aggregated,csv,10,90,0
+aggregated,avro,50,0,50
+aggregated,parquet,24,0,76
